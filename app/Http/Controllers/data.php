@@ -55,4 +55,31 @@ class data extends Controller
             return ['result' => "sorry to saved"];
         }
     }
+
+    public function update(Request $request){
+
+        $student = student::find($request->id);
+        $student->name = $request->name;
+        $student->company = $request->company;
+        $student->position = $request->position;
+
+        $result = $student->save();
+        if($result){
+            return ['result' => "updated successfully"];
+        }else{
+            return ['result' => "update fail"];
+        }
+
+    }
+
+    public function search($string){
+
+        $search = student::Where('name','like', '%'.$string.'%')->get();
+        if(count($search)){
+
+            return $search;
+        }else{
+            return ['result' => "nothing to search"];
+        }
+    }
 }

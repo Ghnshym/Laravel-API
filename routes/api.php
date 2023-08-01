@@ -26,3 +26,7 @@ Route::get('list/{id?}',[data::class, 'list']);
 Route::get('item/{data}',[data::class, 'item']);
 
 Route::post('add',[data::class, 'add']);
+
+Route::put('update',[data::class, 'update']);
+
+Route::get('search/{string}',[data::class, 'search']);
