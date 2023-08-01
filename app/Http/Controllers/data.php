@@ -25,4 +25,34 @@ class data extends Controller
 
         return $id?student::find($id):student::all();
     }
+
+    public function item($data){
+
+        $data = student::where('id', $data)
+                ->orWhere('name', 'like', '%' . $data . '%')
+                ->orWhere('position', 'like', '%' . $data . '%')
+                ->get();
+        if(!empty($data)){
+            return $data;
+        }
+        else{
+            $obj = "This data not in the table sorry";
+            return $obj;
+        }
+    }
+
+    public function add(Request $request){
+
+        $student = new student;
+        $student->name = $request->name;
+        $student->company = $request->company;
+        $student->position = $request->position;
+        $student->save();
+
+        if($student){
+            return ['result' => "successfully saved"];
+        }else{
+            return ['result' => "sorry to saved"];
+        }
+    }
 }
