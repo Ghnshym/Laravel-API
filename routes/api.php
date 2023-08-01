@@ -20,3 +20,5 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::get('data',[data::class, 'data']);
+
+Route::get('list/{id?}',[data::class, 'list']);

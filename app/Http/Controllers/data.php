@@ -20,4 +20,9 @@ class data extends Controller
 
         return response()->json($merge);
     }
+
+    public function list($id=null){
+
+        return $id?student::find($id):student::all();
+    }
 }
