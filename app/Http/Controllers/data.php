@@ -82,4 +82,13 @@ class data extends Controller
             return ['result' => "nothing to search"];
         }
     }
+
+    public function delete($id){
+
+        $delete = student::find($id);
+        $delete->delete();
+        if($delete){
+            return ['result' => "deleted successfully"];
+        }
+    }
 }
