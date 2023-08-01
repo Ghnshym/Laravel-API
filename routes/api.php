@@ -32,3 +32,5 @@ Route::put('update',[data::class, 'update']);
 Route::get('search/{string}',[data::class, 'search']);
 
 Route::delete('delete/{id}',[data::class, 'delete']);
+
+Route::post('addstudent', [data::class, 'addstudent']);

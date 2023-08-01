@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 use App\Models\client;
 use App\Models\student;
 
@@ -90,5 +91,35 @@ class data extends Controller
         if($delete){
             return ['result' => "deleted successfully"];
         }
+    }
+
+    public function addstudent(Request $request){
+       
+        $rules = [
+            'name' => 'required|string|max:255',
+            'company' => 'required|string|max:255',
+            'position' => 'required|string|max:255',
+        ];
+    
+        // Create a validator request 
+        $validator = Validator::make($request->all(), $rules);
+        if($validator->fails()){
+            return [
+                'errors' => $validator->errors()->all(),
+            ];
+        }
+
+        $student = new student;
+        $student->name = $request->name;
+        $student->company = $request->company;
+        $student->position = $request->position;
+        $student->save();
+
+        if($student){
+            return ['result' => "successfully saved"];
+        }else{
+            return ['result' => "sorry to saved"];
+        }
+
     }
 }
